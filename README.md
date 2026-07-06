@@ -1,291 +1,119 @@
-# ALCHEMIST PAYTRUCK - REFACTORED PRODUCTION ARCHITECTURE
+# SiteManagerKenya — Refactored Paytruck (Production-ready)
 
-## 📋 WHAT'S INCLUDED
+## Project Overview
 
-This is a **complete, production-grade refactoring** of the Alchemist Paytruck application. All code is ready to integrate into your Visual Studio project.
+SiteManagerKenya is a refactored, production-focused implementation of the Paytruck application. The codebase provides a layered architecture (Infrastructure, Data, Application, Presentation) with an emphasis on performance, maintainability, and testability.
 
-### ✅ What You Get
+This repository includes the application source, automated tests, database migration scripts, and implementation guidance in the Documentation folder.
 
-- **5 Complete Implementation Layers** (2,160+ lines of production code)
-- **Unit Tests** (375 lines, 15+ tests)
-- **Database Migration Script** (180 lines, zero-data-loss)
-- **Comprehensive Documentation** (5,660+ lines)
-- **Step-by-Step Setup Guide**
+## Key Capabilities
 
-### 📊 Key Improvements
+- Layered architecture following SOLID principles
+- Dependency injection and centralized configuration
+- Generic repository pattern and unit-of-work style data access
+- Optimized payroll calculation and time-tracking model
+- Asynchronous database and I/O operations for responsive UI
+- Comprehensive unit and integration test coverage
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| Payroll Speed | 15s | 100ms | **150x faster** |
-| Worker List | 500ms | 50ms | **10x faster** |
-| Test Coverage | 0% | 80%+ | **∞** |
-| Code Duplication | 40% | <5% | **8x less** |
-| Concurrent Users | 1-2 | 10+ | **5x more** |
+## Repository Structure
 
----
-
-## 🚀 QUICK START
-
-### Step 1: Read First
-1. `Documentation/SETUP_INSTRUCTIONS.md` - Complete implementation guide
-2. `Documentation/IMPLEMENTATION_COMPLETE_SUMMARY.md` - Executive overview
-
-### Step 2: Understand Current Issues
-1. `Documentation/ARCHITECTURE_REVIEW.md` - All problems identified
-2. `Documentation/MIGRATION_ROADMAP.md` - Phased solution
-
-### Step 3: Implement
-1. Copy implementation files to your project
-2. Follow `SETUP_INSTRUCTIONS.md` Phase 1-10
-3. Run `DATABASE_MIGRATION.sql`
-4. Deploy to production
-
----
-
-## 📁 PROJECT STRUCTURE
+Top-level layout:
 
 ```
 RefactoredPaytruck/
-├── SiteManagerKenya/
-│   ├── Infrastructure/
-│   │   ├── Configuration/
-│   │   ├── Logging/
-│   │   ├── Database/
-│   │   └── Exceptions/
-│   ├── Data/
-│   │   ├── Core/
-│   │   ├── Repositories/
-│   │   ├── Entities/
-│   │   └── Migrations/
-│   ├── Application/
-│   │   ├── Services/
-│   │   └── ViewModels/
-│   └── Presentation/
-│       ├── Views/
-│       ├── Pages/
-│       └── ViewModels/
-│
-├── SiteManagerKenya.Tests/
-│   ├── Unit/
-│   │   ├── Services/
-│   │   ├── Repositories/
-│   │   └── ViewModels/
-│   └── Integration/
-│
-└── Documentation/
-    ├── ARCHITECTURE_REVIEW.md
-    ├── MIGRATION_ROADMAP.md
-    ├── SETUP_INSTRUCTIONS.md
-    ├── IMPLEMENTATION_COMPLETE_SUMMARY.md
-    └── DATABASE_MIGRATION.sql
+├── SiteManagerKenya/                # Application source (WPF / .NET)
+├── SiteManagerKenya.Tests/          # Unit and integration tests
+├── Documentation/                   # Architecture, setup, migration guides
+├── SiteManagerKenya.sln             # Visual Studio solution
+├── build.bat / build.ps1            # Build helpers for Windows
+├── run.bat / run.ps1                # Run helpers for Windows
+└── README.md
 ```
 
----
+See the Documentation folder for detailed design decisions and migration steps.
 
-## 💡 KEY FEATURES
+## Prerequisites
 
-### ✅ Dependency Injection
-- Microsoft.Extensions.DependencyInjection
-- Full IoC container setup
-- No static methods
+- .NET SDK 8.0 or compatible (install via dotnet.microsoft.com)
+- Visual Studio 2022/2023 or `dotnet` CLI for build and test
+- SQLite tools (if applying the included migration script)
 
-### ✅ Connection Pooling
-- SqliteConnectionPool (70% performance gain)
-- Reusable connections
-- Thread-safe operations
+On Windows, you can verify the SDK with:
 
-### ✅ Generic Repository Pattern
-- IRepository<T> interface
-- RepositoryBase<T> abstract class
-- 40% less code duplication
-
-### ✅ Unified Time Tracking
-- Single TimeRecord entity
-- Replaces Attendance + Clock
-- Single source of truth
-
-### ✅ Optimized Payroll
-- 1 SQL query instead of 3000
-- 150x performance improvement
-- Handles millions of records
-
-### ✅ Async/Await Throughout
-- Non-blocking database operations
-- Responsive UI
-- Proper async patterns
-
-### ✅ Full Test Coverage
-- 15+ unit tests
-- Mock implementations
-- 80%+ coverage target
-
----
-
-## 📋 IMPLEMENTATION FILES
-
-### Layer 1: Infrastructure
-**IMPLEMENTATION_LAYER1_INFRASTRUCTURE.cs** (527 lines)
-- Configuration management
-- Logging system (FileLogger)
-- Connection pooling (SqliteConnectionPool)
-- Exception handling
-- Database initialization
-
-**Extract to:**
-- `SiteManagerKenya/Infrastructure/Configuration/`
-- `SiteManagerKenya/Infrastructure/Logging/`
-- `SiteManagerKenya/Infrastructure/Database/`
-- `SiteManagerKenya/Infrastructure/Exceptions/`
-
-### Layer 2: Data Access
-**IMPLEMENTATION_LAYER2_DATA_ACCESS.cs** (650 lines)
-- Generic repository pattern
-- TimeRecord unified entity
-- Worker, Payment, User entities
-- Repository implementations
-- DI extensions
-
-**Extract to:**
-- `SiteManagerKenya/Data/Core/`
-- `SiteManagerKenya/Data/Repositories/`
-- `SiteManagerKenya/Data/Entities/`
-
-### Layer 3: Services
-**IMPLEMENTATION_LAYER3_SERVICES.cs** (375 lines)
-- PayrollService (150x faster)
-- TimeRecordService
-- WorkerService
-- Business logic
-- DI extensions
-
-**Extract to:**
-- `SiteManagerKenya/Application/Services/`
-
-### Layer 4: ViewModels
-**IMPLEMENTATION_LAYER4_VIEWMODELS.cs** (513 lines)
-- ViewModelBase
-- RelayCommand & AsyncRelayCommand
-- ClockViewModel
-- PayrollViewModel
-- WorkersViewModel
-
-**Extract to:**
-- `SiteManagerKenya/Presentation/ViewModels/`
-- `SiteManagerKenya/Application/ViewModels/`
-
-### Layer 5: App Startup
-**IMPLEMENTATION_APP_STARTUP.cs** (95 lines)
-- Complete DI configuration
-- Service registration
-- Database initialization
-- Shutdown cleanup
-
-**Replace:**
-- `SiteManagerKenya/App.xaml.cs`
-
-### Testing
-**IMPLEMENTATION_UNIT_TESTS.cs** (375 lines)
-- Service tests (Payroll, TimeRecord, Worker)
-- Repository tests
-- ViewModel tests
-- Mock implementations
-
-**Extract to:**
-- `SiteManagerKenya.Tests/Unit/Services/`
-- `SiteManagerKenya.Tests/Unit/Repositories/`
-- `SiteManagerKenya.Tests/Unit/ViewModels/`
-
-### Database
-**DATABASE_MIGRATION.sql** (180 lines)
-- Create unified TimeRecords table
-- Migrate Attendance data
-- Migrate Clock data
-- Verification queries
-- Rollback instructions
-
-**Execute in:**
-- SQLite Studio or command line
-
----
-
-## 🎯 EXPECTED OUTCOMES
-
-After implementing this blueprint:
-
-✅ **Performance**: 150x faster payroll calculation
-✅ **Code Quality**: 80%+ test coverage
-✅ **Maintainability**: 40% less duplicate code
-✅ **Scalability**: Supports 10+ concurrent users
-✅ **Professional**: Enterprise-grade architecture
-✅ **Future Ready**: Easy to add new features
-
----
-
-## 📞 SUPPORT
-
-Each implementation file includes:
-- ✅ Complete, compilable code
-- ✅ Extensive comments explaining decisions
-- ✅ Multiple examples
-- ✅ Error handling
-- ✅ Logging integration
-- ✅ Best practices
-
-For questions:
-1. Read `Documentation/SETUP_INSTRUCTIONS.md` → Troubleshooting
-2. Check `Documentation/ARCHITECTURE_REVIEW.md` → Detailed explanations
-3. Study code comments → Every file well-documented
-
----
-
-## ⏱️ IMPLEMENTATION TIMELINE
-
-- **Week 1**: Infrastructure Layer (Configuration, Logging, Connection Pool)
-- **Week 2**: Data Access Layer (Repositories, Database Migration)
-- **Week 3**: Services Layer (Business Logic, Payroll Optimization)
-- **Week 4**: ViewModels & Tests (MVVM, Unit Tests)
-- **Weeks 5-8**: Update Existing Pages (UI Integration)
-
-**Total: 6-8 weeks for full implementation**
-
----
-
-## 🔧 TECHNOLOGY STACK
-
-```xml
-Required NuGet Packages:
-✅ Microsoft.Extensions.DependencyInjection
-✅ Microsoft.Extensions.Logging
-✅ Microsoft.Data.Sqlite
-✅ BCrypt.Net-Next
-✅ QuestPDF
-✅ ClosedXML
-✅ xunit (testing)
-✅ Moq (mocking)
+```powershell
+dotnet --info
 ```
 
+## Quick Start — Build and Run (Windows)
+
+1. Open a Developer PowerShell or command prompt in the repository root.
+2. Restore and build the solution:
+
+```powershell
+dotnet restore SiteManagerKenya.sln
+dotnet build SiteManagerKenya.sln -c Release
+```
+
+3. Run the application (WPF) from Visual Studio or using `dotnet` if an entry project is available:
+
+```powershell
+dotnet run --project SiteManagerKenya\SiteManagerKenya.csproj
+```
+
+Alternatively, use the provided scripts on Windows:
+
+```powershell
+.\build.bat
+.\run.bat
+```
+
+## Tests
+
+Run unit and integration tests with the `dotnet` CLI:
+
+```powershell
+dotnet test SiteManagerKenya.Tests\SiteManagerKenya.Tests.csproj -c Release
+```
+
+## Database Migration
+
+The repository contains `Documentation/DATABASE_MIGRATION.sql` for migrating legacy attendance/clock tables into the unified TimeRecords model. Review the migration plan in `Documentation/MIGRATION_ROADMAP.md` before applying scripts. Execute migrations in a controlled environment and create a backup before running any migration.
+
+## Architecture Summary
+
+- Infrastructure: Configuration, logging, connection pooling, and database initialization.
+- Data: Entities, repositories, and data access helpers.
+- Application: Business services (payroll, time tracking, workers).
+- Presentation: WPF views and ViewModels implementing MVVM patterns.
+
+Design goals: performance, clear separation of concerns, testability, and minimal external side effects.
+
+## Contributing
+
+Contributions are welcome. Please follow these guidelines:
+
+1. Open an issue describing the change or bug.
+2. Create a feature branch from `main` or `master`.
+3. Include unit tests for new behavior.
+4. Submit a pull request with a clear description and rationale.
+
+## Documentation
+
+Primary documentation lives in the `Documentation/` folder. Key files:
+
+- `Documentation/SETUP_INSTRUCTIONS.md` — Step-by-step setup and environment details
+- `Documentation/ARCHITECTURE_REVIEW.md` — Rationale and architectural trade-offs
+- `Documentation/MIGRATION_ROADMAP.md` — Data migration plan and phases
+
+## License and Use
+
+Check the repository owner for licensing details. If no explicit license file is present, treat the code as subject to the owner's terms and request permission for production use.
+
+## Contact and Support
+
+For questions about the implementation or migration process, consult the Documentation or open an issue in this repository.
+
 ---
 
-## ✅ QUALITY CHECKLIST
-
-- ✅ Production-ready code
-- ✅ SOLID principles throughout
-- ✅ Complete error handling
-- ✅ Comprehensive logging
-- ✅ Async/await implementation
-- ✅ Thread-safe operations
-- ✅ Memory leak prevention
-- ✅ Security best practices
-- ✅ Performance optimized
-- ✅ Fully testable
-
----
-
-## 📝 LICENSE
-
-All code provided is production-ready and can be used immediately in your project. No additional licensing required.
-
----
-
-**Next Step: Read `Documentation/SETUP_INSTRUCTIONS.md` to begin implementation**
+Updated README for clarity and alignment with the repository contents.
 
